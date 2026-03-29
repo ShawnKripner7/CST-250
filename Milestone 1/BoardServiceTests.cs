@@ -1,4 +1,13 @@
-﻿using MinesweeperClassLibrary.BusinessLogicLayer;
+﻿/*
+ * /*
+ * Shawn Kripner
+ * CST-250
+ * 3/27/2025
+ * Minesweeper Project
+ * Milestone 1
+ */
+
+using MinesweeperClassLibrary.BusinessLogicLayer;
 using MinesweeperClassLibrary.Models;
 using Xunit;
 
