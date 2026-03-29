@@ -256,6 +256,7 @@
             txtMake.Name = "txtMake";
             txtMake.Size = new Size(100, 23);
             txtMake.TabIndex = 1;
+            txtMake.Leave += TxtMakeLeaveEH;
             // 
             // lblYear
             // 
@@ -361,6 +362,7 @@
             rdoSpecialtyNo.TabStop = true;
             rdoSpecialtyNo.Text = "No";
             rdoSpecialtyNo.UseVisualStyleBackColor = true;
+            rdoSpecialtyNo.Click += RdoSpecialtyBooleanClickEH;
             // 
             // lblSpecialtyBooleanError
             // 
@@ -392,6 +394,7 @@
             rdoSpecialtyYes.TabStop = true;
             rdoSpecialtyYes.Text = "Yes";
             rdoSpecialtyYes.UseVisualStyleBackColor = true;
+            rdoSpecialtyYes.Click += RdoSpecialtyBooleanClickEH;
             // 
             // contextMenuStrip1
             // 
