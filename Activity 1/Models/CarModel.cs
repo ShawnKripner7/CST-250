@@ -57,8 +57,8 @@ namespace VehicleClassLibrary.Models
             string convertible = IsConvertible ? "with" : "without";
 
             // Print the car in the following format
-            // 1: 2019 Jeep Wrangler with 4 wheels and a 14.7 cubic foot trunk without a convertible top - $27000.00
-            return $"{Id}: {Year} {Make} {Model} with {NumWheels} wheels and a {TrunkSize} cubic foot trunk {convertible} a convertible top - {Price:C2}";
+            // 1: 2019 Jeep Wrangler with 4 wheels and a 14.7 cubic foot trunk without a convertible top - $27000.00 (added color and miles)
+            return $"{Id}: {Year} {Color} {Make} {Model} with {Miles} miles, {NumWheels} wheels, and a {TrunkSize} cubic foot trunk {convertible} a convertible top - {Price:C2}";
         }
 
     }

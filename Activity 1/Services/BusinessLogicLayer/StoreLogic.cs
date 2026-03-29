@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using VehicleClassLibrary.Models;
 using VehicleClassLibrary.Services.DataAccessLayer;
+using System.Linq;
 
 
 namespace VehicleClassLibrary.Services.BusinessLogicLayer
@@ -82,6 +83,19 @@ namespace VehicleClassLibrary.Services.BusinessLogicLayer
         public List<VehicleModel> ReadInventory()
         {
             return _storeDAO.ReadInventory();
+        }
+
+        // Remove a vehicle from the shopping cart
+        public void RemoveVehicleFromCart(int id)
+        {
+            var cart = _storeDAO.GetShoppingCart();
+
+            var vehicleToRemove = cart.FirstOrDefault(v => v.Id == id);
+
+            if (vehicleToRemove != null)
+            {
+                cart.Remove(vehicleToRemove);
+            }
         }
 
         /// <summary>

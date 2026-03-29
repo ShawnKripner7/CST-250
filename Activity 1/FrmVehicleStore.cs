@@ -8,6 +8,7 @@
 
 using VehicleClassLibrary.Models;
 using VehicleClassLibrary.Services.BusinessLogicLayer;
+using System.Linq;
 
 namespace VehicleStoreGUIApp
 {
@@ -369,7 +370,7 @@ namespace VehicleStoreGUIApp
         private void RdoPickupClickEH(object sender, EventArgs e)
         {
             // Update the selected vehicle variable
-            currentVehicleType = "Vehicle";
+            currentVehicleType = "Pickup";
 
             // Hide the specialty boolean label and radio buttons
             lblSpecialtyBoolean.Visible = false;
@@ -409,6 +410,8 @@ namespace VehicleStoreGUIApp
             wheels = ValidateTxtWheels();
             specialtyBoolean = ValidateSpecialtyBoolean();
             specialtyDecimal = ValidateSpecialtyDecimal();
+            color = txtColor.Text;
+            int.TryParse(txtMiles.Text, out miles);
 
             // Check the state of the flags
             if (isVehicleTypeValid && isMakeValid && isModelValid && isYearValid && isPriceValid &&
@@ -459,6 +462,8 @@ namespace VehicleStoreGUIApp
                 rdoSpecialtyYes.Checked = false;
                 rdoSpecialtyNo.Checked = false;
                 txtSpecialtyDecimal.Clear();
+                txtColor.Clear();
+                txtMiles.Clear();
 
                 // Refresh the list control
                 _inventoryBindingSource.ResetBindings(false);
@@ -518,6 +523,83 @@ namespace VehicleStoreGUIApp
 
             // Reset the bindings for the shopping cart binding source
             _shoppingCartBindingSource.ResetBindings(false);
+        }
+
+        private void BtnRemoveFromCartClickEH(object sender, EventArgs e)
+        {
+            VehicleModel vehicle = (VehicleModel)lstShoppingCart.SelectedItem;
+            _storeLogic.RemoveVehicleFromCart(vehicle.Id);
+            _shoppingCartBindingSource.ResetBindings(false);
+        }
+
+        /// <summary>
+        /// Click event handler for the search button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnSearchClickEH(object sender, EventArgs e)
+        {
+            // Get the search text
+            string searchValue = txtSearch.Text.Trim().ToLower();
+
+            // If search is empty, show the full inventory again
+            if (string.IsNullOrEmpty(searchValue))
+            {
+                _inventoryBindingSource.DataSource = _storeLogic.GetInventory();
+                _inventoryBindingSource.ResetBindings(false);
+                return;
             }
+
+            // Search by make, model, or year
+            var filteredInventory = _storeLogic.GetInventory()
+                .Where(v => v.Make.ToLower().Contains(searchValue)
+                         || v.Model.ToLower().Contains(searchValue)
+                         || v.Year.ToString().Contains(searchValue))
+                .ToList();
+
+            // Update the inventory list
+            _inventoryBindingSource.DataSource = filteredInventory;
+            _inventoryBindingSource.ResetBindings(false);
+        }
+
+        /// <summary>
+        /// Click event handler to sort inventory by price
+        /// </summary>
+        private void BtnSortPriceClickEH(object sender, EventArgs e)
+        {
+            var sortedInventory = _storeLogic.GetInventory()
+            .OrderBy(v => v.Price)
+            .ToList();
+
+            _inventoryBindingSource.DataSource = sortedInventory;
+            _inventoryBindingSource.ResetBindings(false);
+        }
+
+        /// <summary>
+        /// Click event handler to sort inventory alphabetically
+        /// </summary>
+        private void BtnSortMakeModelClickEH(object sender, EventArgs e)
+        {
+            var sortedInventory = _storeLogic.GetInventory()
+        .OrderBy(v => v.Make)
+        .ThenBy(v => v.Model)
+        .ToList();
+
+            _inventoryBindingSource.DataSource = sortedInventory;
+            _inventoryBindingSource.ResetBindings(false);
+        }
+
+        /// <summary>
+        /// Click event handler to sort inventory by year
+        /// </summary>
+        private void BtnSortYearClickEH(object sender, EventArgs e)
+        {
+            var sortedInventory = _storeLogic.GetInventory()
+                .OrderBy(v => v.Year)
+                .ToList();
+
+            _inventoryBindingSource.DataSource = sortedInventory;
+            _inventoryBindingSource.ResetBindings(false);
         }
     }
+}

@@ -56,8 +56,8 @@ namespace VehicleClassLibrary.Models
             string bedCover = HasBedCover ? "with" : "without";
 
             // Print the pickup in the following format
-            // 1: 2001 Toyota Tundra with 4 wheels and a 8.3 cubic foot bed with(out) a bed cover - $5000.00
-            return $"{Id}: {Year} {Make} {Model} with {NumWheels} wheels and a {BedSize} cubic foot bed {bedCover} a bed cover - {Price:C2}";
+            // 1: 2001 Toyota Tundra with 4 wheels and a 8.3 cubic foot bed with(out) a bed cover - $5000.00 (added color and miles)
+            return $"{Id}: {Year} {Color} {Make} {Model} with {Miles} miles, {NumWheels} wheels and a {BedSize} cubic foot bed {bedCover} a bed cover - {Price:C2}";
         }
 
     }

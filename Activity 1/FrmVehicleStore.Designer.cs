@@ -69,6 +69,18 @@
             contextMenuStrip2 = new ContextMenuStrip(components);
             Total = new Label();
             lblTotal = new Label();
+            btnRemoveFromCart = new Button();
+            btnSearch = new Button();
+            btnSortMakeModel = new Button();
+            btnSortYear = new Button();
+            btnSortPrice = new Button();
+            txtMiles = new TextBox();
+            txtColor = new TextBox();
+            lblMiles = new Label();
+            lblColor = new Label();
+            contextMenuStrip3 = new ContextMenuStrip(components);
+            txtSearch = new TextBox();
+            label1 = new Label();
             grpCreateAVehicle.SuspendLayout();
             grpSpecialtyProperties.SuspendLayout();
             grpStoreInventory.SuspendLayout();
@@ -406,7 +418,7 @@
             grpStoreInventory.Controls.Add(lstInventory);
             grpStoreInventory.Location = new Point(273, 22);
             grpStoreInventory.Name = "grpStoreInventory";
-            grpStoreInventory.Size = new Size(297, 458);
+            grpStoreInventory.Size = new Size(644, 458);
             grpStoreInventory.TabIndex = 3;
             grpStoreInventory.TabStop = false;
             grpStoreInventory.Text = "Store Inventory";
@@ -416,12 +428,12 @@
             lstInventory.FormattingEnabled = true;
             lstInventory.Location = new Point(17, 27);
             lstInventory.Name = "lstInventory";
-            lstInventory.Size = new Size(261, 424);
+            lstInventory.Size = new Size(608, 424);
             lstInventory.TabIndex = 0;
             // 
             // btnAddToCart
             // 
-            btnAddToCart.Location = new Point(588, 216);
+            btnAddToCart.Location = new Point(975, 216);
             btnAddToCart.Name = "btnAddToCart";
             btnAddToCart.Size = new Size(85, 28);
             btnAddToCart.TabIndex = 4;
@@ -432,9 +444,9 @@
             // grpShoppingCart
             // 
             grpShoppingCart.Controls.Add(lstShoppingCart);
-            grpShoppingCart.Location = new Point(708, 22);
+            grpShoppingCart.Location = new Point(1110, 22);
             grpShoppingCart.Name = "grpShoppingCart";
-            grpShoppingCart.Size = new Size(297, 458);
+            grpShoppingCart.Size = new Size(629, 458);
             grpShoppingCart.TabIndex = 4;
             grpShoppingCart.TabStop = false;
             grpShoppingCart.Text = "Shopping Cart";
@@ -444,7 +456,7 @@
             lstShoppingCart.FormattingEnabled = true;
             lstShoppingCart.Location = new Point(17, 27);
             lstShoppingCart.Name = "lstShoppingCart";
-            lstShoppingCart.Size = new Size(261, 424);
+            lstShoppingCart.Size = new Size(606, 424);
             lstShoppingCart.TabIndex = 0;
             // 
             // btnCheckout
@@ -480,11 +492,125 @@
             lblTotal.TabIndex = 8;
             lblTotal.Text = "$0";
             // 
+            // btnRemoveFromCart
+            // 
+            btnRemoveFromCart.Location = new Point(944, 250);
+            btnRemoveFromCart.Name = "btnRemoveFromCart";
+            btnRemoveFromCart.Size = new Size(151, 23);
+            btnRemoveFromCart.TabIndex = 9;
+            btnRemoveFromCart.Text = "Remove From Cart";
+            btnRemoveFromCart.UseVisualStyleBackColor = true;
+            btnRemoveFromCart.Click += BtnRemoveFromCartClickEH;
+            // 
+            // btnSearch
+            // 
+            btnSearch.Location = new Point(394, 646);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(75, 23);
+            btnSearch.TabIndex = 11;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += BtnSearchClickEH;
+            // 
+            // btnSortMakeModel
+            // 
+            btnSortMakeModel.Location = new Point(341, 693);
+            btnSortMakeModel.Name = "btnSortMakeModel";
+            btnSortMakeModel.Size = new Size(128, 23);
+            btnSortMakeModel.TabIndex = 12;
+            btnSortMakeModel.Text = "Sort Make and Model";
+            btnSortMakeModel.UseVisualStyleBackColor = true;
+            btnSortMakeModel.Click += BtnSortMakeModelClickEH;
+            // 
+            // btnSortYear
+            // 
+            btnSortYear.Location = new Point(598, 693);
+            btnSortYear.Name = "btnSortYear";
+            btnSortYear.Size = new Size(75, 23);
+            btnSortYear.TabIndex = 13;
+            btnSortYear.Text = "Sort Year";
+            btnSortYear.UseVisualStyleBackColor = true;
+            btnSortYear.Click += BtnSortYearClickEH;
+            // 
+            // btnSortPrice
+            // 
+            btnSortPrice.Location = new Point(495, 693);
+            btnSortPrice.Name = "btnSortPrice";
+            btnSortPrice.Size = new Size(75, 23);
+            btnSortPrice.TabIndex = 14;
+            btnSortPrice.Text = "Sort Price";
+            btnSortPrice.UseVisualStyleBackColor = true;
+            btnSortPrice.Click += BtnSortPriceClickEH;
+            // 
+            // txtMiles
+            // 
+            txtMiles.Location = new Point(161, 596);
+            txtMiles.Name = "txtMiles";
+            txtMiles.Size = new Size(100, 23);
+            txtMiles.TabIndex = 15;
+            // 
+            // txtColor
+            // 
+            txtColor.Location = new Point(9, 596);
+            txtColor.Name = "txtColor";
+            txtColor.Size = new Size(100, 23);
+            txtColor.TabIndex = 16;
+            // 
+            // lblMiles
+            // 
+            lblMiles.AutoSize = true;
+            lblMiles.Location = new Point(193, 622);
+            lblMiles.Name = "lblMiles";
+            lblMiles.Size = new Size(35, 15);
+            lblMiles.TabIndex = 17;
+            lblMiles.Text = "Miles";
+            // 
+            // lblColor
+            // 
+            lblColor.AutoSize = true;
+            lblColor.Location = new Point(34, 622);
+            lblColor.Name = "lblColor";
+            lblColor.Size = new Size(36, 15);
+            lblColor.TabIndex = 18;
+            lblColor.Text = "Color";
+            // 
+            // contextMenuStrip3
+            // 
+            contextMenuStrip3.Name = "contextMenuStrip3";
+            contextMenuStrip3.Size = new Size(61, 4);
+            // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(506, 646);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(100, 23);
+            txtSearch.TabIndex = 20;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(463, 604);
+            label1.Name = "label1";
+            label1.Size = new Size(175, 15);
+            label1.TabIndex = 21;
+            label1.Text = "Search by Name, Model, or Year";
+            // 
             // FrmVehicleStore
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1074, 602);
+            ClientSize = new Size(1763, 906);
+            Controls.Add(label1);
+            Controls.Add(txtSearch);
+            Controls.Add(lblColor);
+            Controls.Add(lblMiles);
+            Controls.Add(txtColor);
+            Controls.Add(txtMiles);
+            Controls.Add(btnSortPrice);
+            Controls.Add(btnSortYear);
+            Controls.Add(btnSortMakeModel);
+            Controls.Add(btnSearch);
+            Controls.Add(btnRemoveFromCart);
             Controls.Add(lblTotal);
             Controls.Add(Total);
             Controls.Add(btnCheckout);
@@ -547,5 +673,17 @@
         private Label lblVehicleTypeError;
         private Label lblSpecialtyBooleanError;
         private Label lblSpecialtyDecimalError;
+        private Button btnRemoveFromCart;
+        private Button btnSearch;
+        private Button btnSortMakeModel;
+        private Button btnSortYear;
+        private Button btnSortPrice;
+        private TextBox txtMiles;
+        private TextBox txtColor;
+        private Label lblMiles;
+        private Label lblColor;
+        private ContextMenuStrip contextMenuStrip3;
+        private TextBox txtSearch;
+        private Label label1;
     }
 }

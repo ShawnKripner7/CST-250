@@ -56,8 +56,8 @@ namespace VehicleClassLibrary.Models
             string sideCar = HasSideCar ? "with" : "without";
 
             // Print the motorcycle in the following format
-            // 1: 2015 Yamaha Bolt with 2 wheels and a 44.1 inch seat with(out) a side car - $8000.00
-            return $"{Id}: {Year} {Make} {Model} with {NumWheels} wheels and a {SeatHeight} inch seat {sideCar} a side car - {Price:C2}";
+            // 1: 2015 Yamaha Bolt with 2 wheels and a 44.1 inch seat with(out) a side car - $8000.00 (added color and miles)
+            return $"{Id}: {Year} {Color} {Make} {Model} with {Miles} miles, {NumWheels} wheels and a {SeatHeight} inch seat {sideCar} a side car - {Price:C2}";
         }
     }
 }

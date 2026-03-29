@@ -69,7 +69,7 @@ namespace VehicleClassLibrary.Models
         {
             // Print the vehicle in the following format
             // 1: 2013 Ford Fiesta with 4 wheels - $800.00
-            return $"{Id}: {Year} {Make} {Model}, Color: {Color}, Miles: {Miles}, with {NumWheels} wheels - {Price:C2}";
+            return $"ID: {Id}, Make: {Make}, Model: {Model}, Year: {Year}, Price: {Price:C}, Wheels: {NumWheels}, Color: {Color}, Miles: {Miles}";
         }
     }
 }
