@@ -485,6 +485,39 @@ namespace VehicleStoreGUIApp
             // Validate the specialty boolean
             ValidateSpecialtyBoolean();
         }
-    }
-}
 
+        /// <summary>
+        /// Click event handler for the add to cart button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnAddToCartClickEH(object sender, EventArgs e)
+        {
+            // Get the selected vehicle from the inventory list
+            VehicleModel vehicle = (VehicleModel)lstInventory.SelectedItem;
+
+            // Add the vehicle to the shopping cart
+            _storeLogic.AddVehicleToCart(vehicle.Id);
+
+            // Reset the bindings for the shopping cart binding source
+            _shoppingCartBindingSource.ResetBindings(false);
+        }
+
+        /// <summary>
+        /// Click event handler for the checkout button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnCheckoutClickEH(object sender, EventArgs e)
+        {
+            // Checkout the user and save the total
+            decimal total = _storeLogic.Checkout();
+
+            // Display the total to lblTotal with a currency format
+            lblTotal.Text = total.ToString("C");
+
+            // Reset the bindings for the shopping cart binding source
+            _shoppingCartBindingSource.ResetBindings(false);
+            }
+        }
+    }

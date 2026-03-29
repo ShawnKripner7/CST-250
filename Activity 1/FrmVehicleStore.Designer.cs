@@ -320,7 +320,7 @@
             grpSpecialtyProperties.Controls.Add(rdoSpecialtyYes);
             grpSpecialtyProperties.Location = new Point(9, 437);
             grpSpecialtyProperties.Name = "grpSpecialtyProperties";
-            grpSpecialtyProperties.Size = new Size(219, 153);
+            grpSpecialtyProperties.Size = new Size(258, 153);
             grpSpecialtyProperties.TabIndex = 1;
             grpSpecialtyProperties.TabStop = false;
             grpSpecialtyProperties.Text = "Specialty Properties";
@@ -338,7 +338,7 @@
             // 
             // txtSpecialtyDecimal
             // 
-            txtSpecialtyDecimal.Location = new Point(113, 100);
+            txtSpecialtyDecimal.Location = new Point(152, 100);
             txtSpecialtyDecimal.Name = "txtSpecialtyDecimal";
             txtSpecialtyDecimal.Size = new Size(100, 23);
             txtSpecialtyDecimal.TabIndex = 7;
@@ -427,6 +427,7 @@
             btnAddToCart.TabIndex = 4;
             btnAddToCart.Text = "Add to Cart";
             btnAddToCart.UseVisualStyleBackColor = true;
+            btnAddToCart.Click += BtnAddToCartClickEH;
             // 
             // grpShoppingCart
             // 
@@ -454,6 +455,7 @@
             btnCheckout.TabIndex = 5;
             btnCheckout.Text = "Checkout";
             btnCheckout.UseVisualStyleBackColor = true;
+            btnCheckout.Click += BtnCheckoutClickEH;
             // 
             // contextMenuStrip2
             // 
