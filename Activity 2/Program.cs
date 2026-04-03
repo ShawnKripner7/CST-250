@@ -15,6 +15,20 @@ using ChessBoardClassLibrary.Models;
 
 Console.WriteLine("Hello, Chess Players!");
 
+// Create a new chess board
+BoardModel board = new BoardModel(8);
+
+// Show the empty board
+Utility.PrintBoard(board);
+
+// Prompt the user for the type of chess piece
+
+// Prompt the user for the location of the chess piece
+
+// Mark the legal moves based on the input
+
+// Print out the new chess board
+
 //--------------------------------------------------------------
 // End of Main Method
 //--------------------------------------------------------------
