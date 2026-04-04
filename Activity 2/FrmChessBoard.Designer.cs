@@ -30,8 +30,10 @@
         {
             label1 = new Label();
             label2 = new Label();
-            comboBox1 = new ComboBox();
-            cmbChesPieces = new Panel();
+            cmbChessPieces = new ComboBox();
+            pnlChessBoard = new Panel();
+            cmbThemes = new ComboBox();
+            label3 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -52,29 +54,49 @@
             label2.TabIndex = 1;
             label2.Text = "Pieces:";
             // 
-            // comboBox1
+            // cmbChessPieces
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "King", "Queen", "Bishop", "Knight", "Rook" });
-            comboBox1.Location = new Point(763, 26);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 2;
+            cmbChessPieces.FormattingEnabled = true;
+            cmbChessPieces.Items.AddRange(new object[] { "King", "Queen", "Bishop", "Knight", "Rook" });
+            cmbChessPieces.Location = new Point(763, 26);
+            cmbChessPieces.Name = "cmbChessPieces";
+            cmbChessPieces.Size = new Size(121, 23);
+            cmbChessPieces.TabIndex = 2;
             // 
-            // cmbChesPieces
+            // pnlChessBoard
             // 
-            cmbChesPieces.Location = new Point(34, 64);
-            cmbChesPieces.Name = "cmbChesPieces";
-            cmbChesPieces.Size = new Size(500, 500);
-            cmbChesPieces.TabIndex = 3;
+            pnlChessBoard.Location = new Point(34, 64);
+            pnlChessBoard.Name = "pnlChessBoard";
+            pnlChessBoard.Size = new Size(500, 500);
+            pnlChessBoard.TabIndex = 3;
+            // 
+            // cmbThemes
+            // 
+            cmbThemes.FormattingEnabled = true;
+            cmbThemes.Location = new Point(763, 90);
+            cmbThemes.Name = "cmbThemes";
+            cmbThemes.Size = new Size(121, 23);
+            cmbThemes.TabIndex = 4;
+            cmbThemes.SelectedIndexChanged += cmbThemes_SelectedIndexChanged;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(704, 98);
+            label3.Name = "label3";
+            label3.Size = new Size(47, 15);
+            label3.TabIndex = 5;
+            label3.Text = "Theme:";
             // 
             // FrmChessBoard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(998, 980);
-            Controls.Add(cmbChesPieces);
-            Controls.Add(comboBox1);
+            Controls.Add(label3);
+            Controls.Add(cmbThemes);
+            Controls.Add(pnlChessBoard);
+            Controls.Add(cmbChessPieces);
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "FrmChessBoard";
@@ -87,7 +109,9 @@
 
         private Label label1;
         private Label label2;
-        private ComboBox comboBox1;
-        private Panel cmbChesPieces;
+        private ComboBox cmbChessPieces;
+        private Panel pnlChessBoard;
+        private ComboBox cmbThemes;
+        private Label label3;
     }
 }
