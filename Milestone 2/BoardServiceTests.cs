@@ -46,9 +46,6 @@ namespace MinesweeperTests
             }
         }
 
-
-
-
         [Fact]
         public void CellModel_WhenCreated_HasCorrectRowAndColumn()
         {

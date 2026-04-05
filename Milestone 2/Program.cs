@@ -26,13 +26,19 @@ namespace MinesweeperConsoleApp
             service.SetupBombs();
             service.CountBombsNearby();
 
-            // game keeps going until a bomb is hit
-            bool gameOver = false;
+            // show full board first for testing
+            PrintAnswers(board);
 
-            // main game loop
-            while (gameOver == false)
+            // keeps track of game state
+            string gameState = "StillPlaying";
+
+            // keeps track of reward use
+            bool rewardAvailable = false;
+
+            // game loop
+            while (gameState == "StillPlaying")
             {
-                // print the board
+                // print the board during play
                 PrintBoard(board);
 
                 // ask user for row
@@ -50,24 +56,68 @@ namespace MinesweeperConsoleApp
                     continue;
                 }
 
-                // do not let the user pick the same cell again
-                if (board.Cells[row, col].IsVisited == true)
+                // ask what move they want to make
+                Console.Write("Enter 1 to Visit, 2 to Flag, 3 to Use Reward: ");
+                int moveChoice = Convert.ToInt32(Console.ReadLine());
+
+                // visit cell
+                if (moveChoice == 1)
                 {
-                    Console.WriteLine("That cell was already picked.");
+                    // do not let player visit flagged cell
+                    if (board.Cells[row, col].IsFlagged == true)
+                    {
+                        Console.WriteLine("That cell is flagged.");
+                        continue;
+                    }
+
+                    service.VisitCell(row, col);
+
+                    // if reward found
+                    if (service.CheckForReward(row, col) == true)
+                    {
+                        rewardAvailable = true;
+                        Console.WriteLine("You found a reward.");
+                    }
+                }
+                // flag cell
+                else if (moveChoice == 2)
+                {
+                    service.FlagCell(row, col);
+                }
+                // use reward
+                else if (moveChoice == 3)
+                {
+                    if (rewardAvailable == true)
+                    {
+                        Console.WriteLine(service.UseReward(row, col));
+                        rewardAvailable = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("No reward available.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid choice.");
                     continue;
                 }
 
-                // visit the cell
-                gameOver = service.VisitCell(row, col);
-
-                // if bomb was hit
-                if (gameOver)
-                {
-                    Console.WriteLine("You hit a bomb. Game over.");
-                }
+                // update game state after move
+                gameState = service.DetermineGameState();
             }
 
-            // show the full board at the end
+            // print final result
+            if (gameState == "Won")
+            {
+                Console.WriteLine("You win!");
+            }
+            else if (gameState == "Lost")
+            {
+                Console.WriteLine("You hit a bomb. Game over.");
+            }
+
+            // show final board
             PrintAnswers(board);
 
             Console.ReadLine();
@@ -82,8 +132,14 @@ namespace MinesweeperConsoleApp
                 // go through each column
                 for (int col = 0; col < board.Size; col++)
                 {
+                    // if player put a flag here
+                    if (board.Cells[row, col].IsFlagged == true)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write("F ");
+                    }
                     // if cell has not been visited yet
-                    if (board.Cells[row, col].IsVisited == false)
+                    else if (board.Cells[row, col].IsVisited == false)
                     {
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.Write("? ");
@@ -93,6 +149,12 @@ namespace MinesweeperConsoleApp
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.Write("B ");
+                    }
+                    // if this cell had a reward
+                    else if (board.Cells[row, col].HasSpecialReward == true)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.Write("R ");
                     }
                     // if number
                     else if (board.Cells[row, col].NumberOfBombNeighbors > 0)
@@ -108,11 +170,11 @@ namespace MinesweeperConsoleApp
                     }
                 }
 
-                // move to next line
+                // next line
                 Console.WriteLine();
             }
 
-            // reset color back to normal
+            // reset color
             Console.ResetColor();
         }
 
