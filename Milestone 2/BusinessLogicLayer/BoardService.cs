@@ -103,10 +103,13 @@ namespace MinesweeperClassLibrary.BusinessLogicLayer
             // mark it as visited
             cell.IsVisited = true;
 
-            // check if the cell has a reward first
+            // check if the cell has a reward
             if (cell.HasSpecialReward)
             {
                 Console.WriteLine("You found a reward!");
+
+                // remove reward so it can't trigger again
+                cell.HasSpecialReward = false;
             }
 
             // if it's a bomb, game over
