@@ -25,7 +25,7 @@ class Program
         input = Console.ReadLine();
 
         // See if the user entered valid input
-        while (!int.TryParse(input, out choice) || choice <= 0)
+        while (!int.TryParse(input, out choice))
         {
             Console.WriteLine("Invalid number");
 
@@ -36,9 +36,18 @@ class Program
             input = Console.ReadLine();
         }
 
+        // reset the counter before starting
+        Utility.StepCounter = 0;
+
+        // reset the multiply rule before starting
+        Utility.MultiplyUsed = false;
+
         // Call the CountToOne function
         result = Utility.CountToOne(choice);
         Console.WriteLine($"The end number is {result}");
+
+        // show how many steps it took
+        Console.WriteLine($"Total steps: {Utility.StepCounter}"); 
 
         //------------------------------------------------------------
         // End of the Main Method
@@ -50,17 +59,25 @@ class Program
 // Start of the Utility class
 //------------------------------------------------------------
 
-// 0 references
+
 static class Utility
 {
+    // keeps track of how many times the function runs
+    public static int StepCounter = 0;
+
+    // makes sure the multiply rule only happens one time
+    public static bool MultiplyUsed = false;
+
     /// <summary>
     /// Count to one using recursion
     /// </summary>
     /// <param name="num"></param>
     /// <returns></returns>
-    // 2 references
     internal static int CountToOne(int num)
     {
+        // increase the counter each time the method runs
+        StepCounter++;
+
         // Print out the current number
         Console.WriteLine($"The current number is {num}");
 
@@ -71,6 +88,42 @@ static class Utility
         }
         else
         {
+            // handle 0 so it can move to 1
+            if (num == 0)
+            {
+                Console.WriteLine("The number is 0. Add 1");
+                return CountToOne(num + 1);
+            }
+
+            // handle negative numbers by moving up
+            if (num < 0)
+            {
+                Console.WriteLine("The number is negative. Add 1");
+                return CountToOne(num + 1);
+            }
+
+            // use multiplication one time for numbers divisible by 5
+            if (num % 5 == 0 && MultiplyUsed == false)
+            {
+                MultiplyUsed = true;
+                Console.WriteLine("The number is divisible by 5. Multiply by 2");
+                return CountToOne(num * 2);
+            }
+
+            // divide by 4 first if possible
+            if ((num % 4) == 0)
+            {
+                Console.WriteLine("The number is divisible by 4. Divide by 4");
+                return CountToOne(num / 4);
+            }
+
+            // then divide by 3 if possible
+            if ((num % 3) == 0)
+            {
+                Console.WriteLine("The number is divisible by 3. Divide by 3");
+                return CountToOne(num / 3);
+            }
+
             // Check if the number is even
             if ((num % 2) == 0)
             {
@@ -81,10 +134,10 @@ static class Utility
             }
             else
             {
-                Console.WriteLine("The number is odd. Add 1");
+                Console.WriteLine("The number is odd. Subtract 1");
 
-                // Add 1 and call the function
-                return CountToOne(num + 1);
+                // Subtract 1 and call the function
+                return CountToOne(num - 1);
             }
         }
     }
