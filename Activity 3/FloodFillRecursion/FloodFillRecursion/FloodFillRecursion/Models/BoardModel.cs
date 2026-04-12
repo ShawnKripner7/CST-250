@@ -24,6 +24,29 @@ namespace FloodFillRecursion.Models
         /// Parameterized constructor for BoardModel
         /// </summary>
         /// <param name="size"></param>
+        public BoardModel(int size)
+        {
+            Size = size;
+            NumShapes = 3;
+            Grid = new CellModel[Size, Size];
+
+            // Set up the Grid
+            for (int row = 0; row < Size; row++)
+            {
+                for (int col = 0; col < Size; col++)
+                {
+                    Grid[row, col] = new CellModel(row, col, "E");
+                }
+            }
+
+            // Place random shapes on the board
+            PlaceShapes();
+        }
+
+        /// <summary>
+        /// Parameterized constructor for BoardModel
+        /// </summary>
+        /// <param name="size"></param>
         public BoardModel(int size, int numShapes)
         {
             Size = size;
@@ -51,7 +74,7 @@ namespace FloodFillRecursion.Models
             // Declare and initialize
             // Random object to generate numbers
             Random random = new Random();
-            int shapeSize = Size / 2, row = 0, col = 0;
+            int shapeSize = Size / 4, row = 0, col = 0;
 
             // Create three shapes
             for (int shapes = 0; shapes < NumShapes; shapes++)
@@ -75,6 +98,14 @@ namespace FloodFillRecursion.Models
                     // Right wall
                     Grid[row + offset, col + shapeSize - 1].Contents = "W";
                 }
+            }
+
+            // add some random wall points too
+            for (int points = 0; points < 20; points++)
+            {
+                row = random.Next(0, Size);
+                col = random.Next(0, Size);
+                Grid[row, col].Contents = "W";
             }
         } // End of PlaceShapes method
     }
