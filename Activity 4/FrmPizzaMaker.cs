@@ -88,5 +88,71 @@ namespace PizzaMaker
             // Call the Enable Pizza Creation Method
             EnablePizzaCreation();
         }
+
+        /// <summary>
+        /// Checked changed event handler for ingredient check boxes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ChbIngredientCheckedChangedEH(object sender, EventArgs e)
+        {
+            // Get the check box from the sender parameter
+            CheckBox checkbox = sender as CheckBox;
+
+            // Make sure the checkbox is not null
+            if (checkbox != null)
+            {
+                // If the checkbox is checked, add the ingredient to the pizza
+                if (checkbox.Checked)
+                {
+                    // Add the current ingredient to the pizza
+                    _pizza.Ingredients.Add(checkbox.Text);
+                }
+                // If the checkbox is not checked, remove the ingredient
+                else
+                {
+                    // Remove the current ingredient from the pizza
+                    _pizza.Ingredients.Remove(checkbox.Text);
+                }
+            }
+
+            // Update the price of the pizza
+            UpdatePrice();
+        }
+
+        /// <summary>
+        /// Selected Index Changed event handler for lsbStrangeAddOns
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LsbStrangeAddOnsSelectedIndexChangedEH(object sender, EventArgs e)
+        {
+            // Get the list of selected items and set the StrangeAddOns property of the pizza
+            _pizza.StrangeAddOns = lsbStrangeAddOns.SelectedItems.Cast<string>().ToList();
+
+            // Update the price of the pizza
+            UpdatePrice();
+        }
+
+        /// <summary>
+        /// Checked changed event handler for crust radio buttons
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RdoCrustCheckedChangedEH(object sender, EventArgs e)
+        {
+            // Get the radio button from the sender object
+            RadioButton radioButton = sender as RadioButton;
+
+            // Make sure the radio button is not null
+            if (radioButton != null && radioButton.Checked)
+            {
+                // Set the current crust to the pizzas crust
+                _pizza.Crust = radioButton.Text;
+            }
+
+            // Update the price of the pizza
+            UpdatePrice();
+        }
     }
 }
