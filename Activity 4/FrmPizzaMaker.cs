@@ -33,6 +33,10 @@ namespace PizzaMaker
 
             // Update the price of the pizza
             UpdatePrice();
+
+            // Update the maximums for hsbSauce and hsbCheese
+            hsbSauce.Maximum = 100 + hsbSauce.LargeChange - 1;
+            hsbCheese.Maximum = 100 + hsbCheese.LargeChange - 1;
         }
 
         /// <summary>
@@ -153,6 +157,51 @@ namespace PizzaMaker
 
             // Update the price of the pizza
             UpdatePrice();
+        }
+
+        /// <summary>
+        /// Value changed event handler for the horizontal scroll bars
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HsbExtraGoodiesValueChangedEH(object sender, EventArgs e)
+        {
+            // Cast the sender object to an HScrollBar
+            HScrollBar scrollBar = sender as HScrollBar;
+
+            // Make sure the scroll bar is not null
+            if (scrollBar != null)
+            {
+                // Check if the scroll bar is hsbSauce
+                if (scrollBar == hsbSauce)
+                {
+                    // Updated the SauceQty using the scroll bars value
+                    _pizza.SauceQty = scrollBar.Value;
+
+                    // Update lblSauce label
+                    lblSauce.Text = scrollBar.Value.ToString();
+                }
+                // Check if the scroll bar is hsbCheese
+                else if (scrollBar == hsbCheese)
+                {
+                    // Updated the CheeseQty using the scroll bars value
+                    _pizza.CheeseQty = scrollBar.Value;
+
+                    // Update lblCheese label
+                    lblCheese.Text = scrollBar.Value.ToString();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Value changed event handler for dtpDeliveryTime
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DtpDeliveryTimeValueChangedEH(object sender, EventArgs e)
+        {
+            // Update the delivery time for the pizza
+            _pizza.DeliveryTime = dtpDeliveryTime.Value;
         }
     }
 }
