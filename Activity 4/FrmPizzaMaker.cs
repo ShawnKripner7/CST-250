@@ -40,6 +40,9 @@ namespace PizzaMaker
             // Disable the Reset Form button
             btnResetForm.Enabled = false;
 
+            // Disable the See Full Order button
+            btnSeeFullOrder.Enabled = false;
+
             // Update the price of the pizza
             UpdatePrice();
 
@@ -254,8 +257,16 @@ namespace PizzaMaker
             // Check if the pizza was valid
             if (isValidPizza)
             {
+                // Enable the See Full Order button
+                btnSeeFullOrder.Enabled = true;
+
                 // Reset the form
                 ResetForm();
+            }
+            else
+            {
+                // Show a failure message to the user
+                MessageBox.Show("Your pizza order is not complete.");
             }
         }
 
@@ -368,5 +379,28 @@ namespace PizzaMaker
                 }
             }
         } // End of ResetControls method
+
+        /// <summary>
+        /// Click event handler for btnSeeFullOrder
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnSeeFullOrderClickEH(object sender, EventArgs e)
+        {
+            // Declare and initialize
+            List<PizzaModel> pizzaList;
+
+            // Get the pizza list from pizzaLogic
+            pizzaList = _pizzaLogic.GetPizzaOrder();
+
+            // Create a new form with the pizza list
+            FrmOrderDetails frmOrderDetails = new FrmOrderDetails(pizzaList, _pizzaLogic);
+
+            // Update the label with the pizza order
+            frmOrderDetails.DisplayPizzas();
+
+            // Show the form
+            frmOrderDetails.ShowDialog();
+        }
     }
 }

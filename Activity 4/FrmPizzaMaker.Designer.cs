@@ -61,6 +61,7 @@
             lblPizzaPrice = new Label();
             btnResetForm = new Button();
             btnCreatePizza = new Button();
+            btnSeeFullOrder = new Button();
             grpIngredients.SuspendLayout();
             grpCrust.SuspendLayout();
             grpExtraGoodies.SuspendLayout();
@@ -438,11 +439,22 @@
             btnCreatePizza.UseVisualStyleBackColor = true;
             btnCreatePizza.Click += BtnCreatePizzaClickEH;
             // 
+            // btnSeeFullOrder
+            // 
+            btnSeeFullOrder.Location = new Point(438, 370);
+            btnSeeFullOrder.Name = "btnSeeFullOrder";
+            btnSeeFullOrder.Size = new Size(123, 23);
+            btnSeeFullOrder.TabIndex = 16;
+            btnSeeFullOrder.Text = "See Full Order";
+            btnSeeFullOrder.UseVisualStyleBackColor = true;
+            btnSeeFullOrder.Click += BtnSeeFullOrderClickEH;
+            // 
             // FrmPizzaMaker
             // 
             AutoScaleDimensions = new SizeF(9F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1398, 1037);
+            Controls.Add(btnSeeFullOrder);
             Controls.Add(btnCreatePizza);
             Controls.Add(btnResetForm);
             Controls.Add(lblPizzaPrice);
@@ -508,5 +520,6 @@
         private Label lblPizzaPrice;
         private Button btnResetForm;
         private Button btnCreatePizza;
+        private Button btnSeeFullOrder;
     }
 }
