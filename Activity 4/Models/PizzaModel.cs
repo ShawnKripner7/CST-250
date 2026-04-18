@@ -11,9 +11,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
-namespace PizzaMaker.Models
+namespace PizzaMakerClassLibrary.Models
 {
-    internal class PizzaModel
+    public class PizzaModel
     {
         // Class properties
         public string ClientName { get; set; }
