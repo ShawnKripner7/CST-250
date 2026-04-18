@@ -397,6 +397,7 @@
             picPizzaBoxColor.Size = new Size(201, 50);
             picPizzaBoxColor.TabIndex = 11;
             picPizzaBoxColor.TabStop = false;
+            picPizzaBoxColor.Click += PicPizzaBoxColorClickEH;
             // 
             // label7
             // 

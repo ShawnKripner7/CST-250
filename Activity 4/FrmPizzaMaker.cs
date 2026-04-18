@@ -203,5 +203,113 @@ namespace PizzaMaker
             // Update the delivery time for the pizza
             _pizza.DeliveryTime = dtpDeliveryTime.Value;
         }
+
+        /// <summary>
+        /// Click event handler for picPizzaBoxColor
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PicPizzaBoxColorClickEH(object sender, EventArgs e)
+        {
+            // Create a new color dialog object
+            ColorDialog pizzaBoxColorPicker = new ColorDialog();
+
+            // Call the ShowDialog method
+            DialogResult result = pizzaBoxColorPicker.ShowDialog();
+
+            // Check if the color picker returned OK
+            if (result == DialogResult.OK)
+            {
+                // Set the pizza pizza box color
+                _pizza.PizzaBoxColor = pizzaBoxColorPicker.Color;
+
+                // Set the color of the picture box
+                picPizzaBoxColor.BackColor = pizzaBoxColorPicker.Color;
+            }
+        }
+
+        /// <summary>
+        /// Reset the controls within the parent control
+        /// </summary>
+        /// <param name="parentControl"></param>
+        private void ResetControls(Control parentControl)
+        {
+            // Loop through the controls within the parent control
+            foreach (Control control in parentControl.Controls)
+            {
+                // Get the type of the control
+                Type controlType = control.GetType();
+
+                // Save the type of the control as a string
+                string type = controlType.Name.ToString();
+
+                // Use a switch case to handle the resets
+                switch (type)
+                {
+                    case "TextBox":
+                        // Cast the control to a textbox
+                        TextBox textbox = (TextBox)control;
+
+                        // Clear the textbox
+                        textbox.Clear();
+                        break;
+
+                    case "CheckBox":
+                        // Cast the control to a checkbox
+                        CheckBox checkbox = (CheckBox)control;
+
+                        // Make sure the checkbox is not checked
+                        checkbox.Checked = false;
+                        break;
+
+                    case "ListBox":
+                        // Cast the control to a list box
+                        ListBox listbox = (ListBox)control;
+
+                        // Clear the selected items in the list box
+                        listbox.ClearSelected();
+                        break;
+
+                    case "RadioButton":
+                        // Cast the control to a radio button
+                        RadioButton radioButton = (RadioButton)control;
+
+                        // Make sure the radio button is not checked
+                        radioButton.Checked = false;
+                        break;
+
+                    case "HScrollBar":
+                        // Cast the control to a horizontal scroll bar
+                        HScrollBar hScrollBar = (HScrollBar)control;
+
+                        // Set the scroll bars value to 0
+                        hScrollBar.Value = 0;
+                        break;
+
+                    case "DateTimePicker":
+                        // Cast the control to a date time picker
+                        DateTimePicker dateTimePicker = (DateTimePicker)control;
+
+                        // Set the date to 1/1/2025 12:00am
+                        dateTimePicker.Value = new DateTime(2025, 1, 1, 0, 0, 0);
+                        break;
+
+                    case "PictureBox":
+                        // Cast the control to a picture box
+                        PictureBox pictureBox = (PictureBox)control;
+
+                        // Change the picture box back color to the default
+                        pictureBox.BackColor = SystemColors.Control;
+                        break;
+                }
+
+                // Check if the control has controls (children)
+                if (control.HasChildren)
+                {
+                    // Recursively call the Reset method using the current control
+                    ResetControls(control);
+                }
+            }
+        } // End of ResetControls method
     }
 }
