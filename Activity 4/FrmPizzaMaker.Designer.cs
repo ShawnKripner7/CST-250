@@ -375,7 +375,7 @@
             dtpDeliveryTime.Format = DateTimePickerFormat.Custom;
             dtpDeliveryTime.Location = new Point(395, 97);
             dtpDeliveryTime.Name = "dtpDeliveryTime";
-            dtpDeliveryTime.Size = new Size(280, 26);
+            dtpDeliveryTime.Size = new Size(279, 26);
             dtpDeliveryTime.TabIndex = 9;
             dtpDeliveryTime.ValueChanged += DtpDeliveryTimeValueChangedEH;
             // 
@@ -436,6 +436,7 @@
             btnCreatePizza.TabIndex = 15;
             btnCreatePizza.Text = "Create Pizza";
             btnCreatePizza.UseVisualStyleBackColor = true;
+            btnCreatePizza.Click += BtnCreatePizzaClickEH;
             // 
             // FrmPizzaMaker
             // 
