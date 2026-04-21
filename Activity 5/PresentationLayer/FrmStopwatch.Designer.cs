@@ -34,11 +34,12 @@
             btnReset = new Button();
             lblTimeElapsed = new Label();
             tmrStopwatch = new System.Windows.Forms.Timer(components);
+            btnTarget = new Button();
             SuspendLayout();
             // 
             // btnStart
             // 
-            btnStart.Location = new Point(89, 75);
+            btnStart.Location = new Point(12, 430);
             btnStart.Name = "btnStart";
             btnStart.Size = new Size(75, 23);
             btnStart.TabIndex = 0;
@@ -48,7 +49,7 @@
             // 
             // btnStop
             // 
-            btnStop.Location = new Point(89, 142);
+            btnStop.Location = new Point(105, 430);
             btnStop.Name = "btnStop";
             btnStop.Size = new Size(75, 23);
             btnStop.TabIndex = 1;
@@ -58,7 +59,7 @@
             // 
             // btnReset
             // 
-            btnReset.Location = new Point(89, 212);
+            btnReset.Location = new Point(197, 430);
             btnReset.Name = "btnReset";
             btnReset.Size = new Size(75, 23);
             btnReset.TabIndex = 2;
@@ -69,7 +70,7 @@
             // lblTimeElapsed
             // 
             lblTimeElapsed.AutoSize = true;
-            lblTimeElapsed.Location = new Point(105, 30);
+            lblTimeElapsed.Location = new Point(12, 22);
             lblTimeElapsed.Name = "lblTimeElapsed";
             lblTimeElapsed.Size = new Size(38, 15);
             lblTimeElapsed.TabIndex = 3;
@@ -81,11 +82,21 @@
             tmrStopwatch.Interval = 1000;
             tmrStopwatch.Tick += TmrStopwatchTickEH;
             // 
+            // btnTarget
+            // 
+            btnTarget.Location = new Point(86, 98);
+            btnTarget.Name = "btnTarget";
+            btnTarget.Size = new Size(94, 78);
+            btnTarget.TabIndex = 4;
+            btnTarget.Text = "Target";
+            btnTarget.UseVisualStyleBackColor = true;
+            // 
             // FrmStopwatch
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(307, 450);
+            ClientSize = new Size(773, 465);
+            Controls.Add(btnTarget);
             Controls.Add(lblTimeElapsed);
             Controls.Add(btnReset);
             Controls.Add(btnStop);
@@ -103,5 +114,6 @@
         private Button btnReset;
         private Label lblTimeElapsed;
         private System.Windows.Forms.Timer tmrStopwatch;
+        private Button btnTarget;
     }
 }
