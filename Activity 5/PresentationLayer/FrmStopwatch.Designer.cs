@@ -54,7 +54,7 @@
             btnStop.TabIndex = 1;
             btnStop.Text = "Stop";
             btnStop.UseVisualStyleBackColor = true;
-            btnStop.Click += this.BtnStopClickEH;
+            btnStop.Click += BtnStopClickEH;
             // 
             // btnReset
             // 
@@ -64,6 +64,7 @@
             btnReset.TabIndex = 2;
             btnReset.Text = "Reset";
             btnReset.UseVisualStyleBackColor = true;
+            btnReset.Click += BtnResetClickEH;
             // 
             // lblTimeElapsed
             // 
@@ -78,6 +79,7 @@
             // 
             tmrStopwatch.Enabled = true;
             tmrStopwatch.Interval = 1000;
+            tmrStopwatch.Tick += TmrStopwatchTickEH;
             // 
             // FrmStopwatch
             // 

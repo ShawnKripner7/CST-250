@@ -6,10 +6,16 @@
  * Activity 5
  * */
 
+using System;
+using System.Windows.Forms;
+
 namespace WhackAMole
 {
     public partial class FrmStopwatch : Form
     {
+        // Class-level variable to track time
+        private TimeSpan timeElapsed;
+
         public FrmStopwatch()
         {
             InitializeComponent();
@@ -39,5 +45,40 @@ namespace WhackAMole
             tmrStopwatch.Stop();
         }
 
+        /// <summary>
+        /// Tick Event Handler for tmrStopwatch
+        /// Updates the timeElapsed variable and the label
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TmrStopwatchTickEH(object sender, EventArgs e)
+        {
+            // Get the interval from tmrStopwatch
+            int interval = tmrStopwatch.Interval;
+
+            // Add the timer interval to timeElapsed
+            timeElapsed = timeElapsed.Add(TimeSpan.FromMilliseconds(interval));
+
+            // Show the timeElapsed on the label
+            lblTimeElapsed.Text = timeElapsed.ToString();
+        }
+
+        /// <summary>
+        /// Click Event Handler for btnReset
+        /// Resets the timer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnResetClickEH(object sender, EventArgs e)
+        {
+            // Stop the timer
+            tmrStopwatch.Stop();
+
+            // Reset timeElapsed
+            timeElapsed = new TimeSpan();
+
+            // Update label
+            lblTimeElapsed.Text = timeElapsed.ToString();
+        }
     }
 }
