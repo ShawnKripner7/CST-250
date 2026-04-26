@@ -42,35 +42,44 @@ namespace MinesweeperGUI
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // save each game stat as one line in the file
+            // open a file to write the scores to
             using (StreamWriter writer = new StreamWriter(_filePath))
             {
+                // loop through each game stat in the list
                 foreach (GameStat stat in _stats)
                 {
+                    // write each stat as a single line separated by commas
                     writer.WriteLine(stat.Id + "," + stat.Name + "," + stat.Score + "," +
                         stat.GameTime.TotalSeconds + "," + stat.DatePlayed);
                 }
             }
 
+            // let the user know the file was saved
             MessageBox.Show("Scores saved.");
         }
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // check if the file exists before trying to read it
             if (File.Exists(_filePath) == false)
             {
                 MessageBox.Show("No score file found.");
                 return;
             }
 
+            // clear the current list so we don't duplicate data
             _stats.Clear();
 
+            // read all lines from the file
             string[] lines = File.ReadAllLines(_filePath);
 
+            // loop through each line in the file
             foreach (string line in lines)
             {
+                // split the line into parts using commas
                 string[] parts = line.Split(',');
 
+                // make sure the data is valid before using it
                 if (parts.Length == 5)
                 {
                     int id = Convert.ToInt32(parts[0]);
@@ -78,14 +87,21 @@ namespace MinesweeperGUI
                     int score = Convert.ToInt32(parts[2]);
                     TimeSpan gameTime = TimeSpan.FromSeconds(Convert.ToDouble(parts[3]));
 
+                    // create a new GameStat object using the data
                     GameStat stat = new GameStat(id, name, score, gameTime);
+
+                    // set the date separately
                     stat.DatePlayed = Convert.ToDateTime(parts[4]);
 
+                    // add the stat to the list
                     _stats.Add(stat);
                 }
             }
 
+            // update the grid to show loaded data
             UpdateGrid();
+
+            // let the user know the load worked
             MessageBox.Show("Scores loaded.");
         }
 
