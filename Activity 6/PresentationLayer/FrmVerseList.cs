@@ -30,6 +30,11 @@ namespace FileIOAndLINQ.PresentationLayer
         private VerseLogic _verseLogic;
         // Binding source for the data grid view
         private BindingSource _versesBindingSource;
+        // Filters for file dialogs
+        string filter = "All Files (*.*)|*.*|" +
+                        "Text File (*.txt)|*.txt|" +
+                        "CSV File (*.csv)|*.csv|" +
+                        "JSON File (*.json)|*.json";
 
         /// <summary>
         /// Default constructor for FrmVerseList
@@ -425,11 +430,6 @@ namespace FileIOAndLINQ.PresentationLayer
         private void TsmSaveClickEH(object sender, EventArgs e)
         {
             // Declare and initialize
-            // Filters for file dialogs
-            string filter = "All Files (*.*)|*.*|" +
-                            "Text File (*.txt)|*.txt|" +
-                            "CSV File (*.csv)|*.csv|" +
-                            "JSON File (*.json)|*.json";
             string fileName = "", result = "";
             // Variable to store the result of the SaveFileDialog
             DialogResult dialogResult;
@@ -456,5 +456,40 @@ namespace FileIOAndLINQ.PresentationLayer
             }
             // End of TsmSaveClickEH
         }
+
+        /// <summary>
+        /// Click event handler to get verses from a text file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TsmLoadClickEH(object sender, EventArgs e)
+        {
+            // Declare and initialize
+            string fileName = "", result = "";
+            DialogResult dialogResult;
+
+            // Create an open file dialog
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                // Set the title for the dialog
+                openFileDialog.Title = "Save File";
+                // Set the filter for the dialog
+                openFileDialog.Filter = filter;
+                // Show the file dialog and store the result
+                dialogResult = openFileDialog.ShowDialog();
+                // Check to make sure the file dialog returned OK
+                if (dialogResult == DialogResult.OK)
+                {
+                    // Get the file name from the file dialog
+                    fileName = openFileDialog.FileName;
+                    // Read the file to add the verses to the verse inventory
+                    result = _verseLogic.ReadVersesFromFile(fileName);
+                    // Display the result in a message box
+                    MessageBox.Show(result);
+                    // Refresh the data grid view
+                    RefreshVersesDgv();
+                }
+            }
+        } // End of TsmLoadClickEH
     }
 }

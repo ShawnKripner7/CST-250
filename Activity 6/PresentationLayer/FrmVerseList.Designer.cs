@@ -95,6 +95,7 @@
             tsmLoad.Name = "tsmLoad";
             tsmLoad.Size = new Size(180, 22);
             tsmLoad.Text = "Load";
+            tsmLoad.Click += TsmLoadClickEH;
             // 
             // tsmExit
             // 
