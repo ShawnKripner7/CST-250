@@ -28,6 +28,8 @@ namespace FileIOAndLINQ.PresentationLayer
         bool isValidText = false, isValidMeaning = false, isValidImportance = false;
         // Business logic variable
         private VerseLogic _verseLogic;
+        // Binding source for the data grid view
+        private BindingSource _versesBindingSource;
 
         /// <summary>
         /// Default constructor for FrmVerseList
@@ -41,6 +43,8 @@ namespace FileIOAndLINQ.PresentationLayer
             InitializeBooks();
             // Initialize the verse logic variable
             _verseLogic = new VerseLogic();
+            // Initialize the binding source object
+            _versesBindingSource = new BindingSource();
         }
 
         /// <summary>
@@ -281,54 +285,78 @@ namespace FileIOAndLINQ.PresentationLayer
         /// <param name="e"></param>
         private void BtnAddVerseClickEH(object sender, EventArgs e)
         {
+            // Declare and initialize
             int chapter = -1;
             VerseRequestModel verse;
 
+            // Check the flags to see if the user has entered valid data
             if (isValidBook && isValidChapter && isValidVerse && isValidText && isValidMeaning && isValidImportance)
             {
+                // Set up a try-catch to cast the chapter to an int
                 try
                 {
+                    // Parse the chapter to an int
                     chapter = int.Parse(txtVerseChapter.Text);
                 }
                 catch (Exception)
                 {
+                    // Update the error label for the chapter
                     lblChapterError.Text = "The chapter must be a number";
+                    // Show the chapter error label
                     lblChapterError.Visible = true;
                     return;
                 }
 
+                // Create the verse variable
                 verse = new VerseRequestModel(cmbVerseBook.Text, chapter, txtVerseVerse.Text,
                     txtVerseText.Text, txtVerseMeaning.Text, (int)nudVerseImportance.Value);
 
+                // Add the new verse using the _verseLogic variable
                 _verseLogic.AddVerse(verse);
 
+                // Clear the input fields
                 ClearInputFields();
+
+                // Refresh the data grid view
+                RefreshVersesDgv();
             }
+            // Check if the book is invalid
             else if (!isValidBook)
             {
+                // Show the book error label
                 lblBookError.Visible = true;
             }
+            // Check if the chapter is invalid
             else if (!isValidChapter)
             {
+                // Show the chapter error label
                 lblChapterError.Visible = true;
             }
+            // Check if the verse is invalid
             else if (!isValidVerse)
             {
+                // Show the verse error label
                 lblVerseError.Visible = true;
             }
+            // Check if the text is invalid
             else if (!isValidText)
             {
+                // Show the text error label
                 lblTextError.Visible = true;
             }
+            // Check if the meaning is invalid
             else if (!isValidMeaning)
             {
+                // Show the meaning error label
                 lblMeaningError.Visible = true;
             }
+            // Check if the importance is invalid
             else if (!isValidImportance)
             {
+                // Show the importance error label
                 lblImportanceError.Visible = true;
             }
-        }  // End of BtnClickAddVerseEH
+        } // End of BtnAddVerseClickEH 
 
         /// <summary>
         /// Clear the input fields used to add a verse
@@ -346,5 +374,48 @@ namespace FileIOAndLINQ.PresentationLayer
             // Reset the numeric up-down control
             nudVerseImportance.Value = 0;
         }
+
+        /// <summary>
+        /// Load event handler for FrmVerseList
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FrmVerseListLoadEH(object sender, EventArgs e)
+        {
+            // Set the data source for the data grid view
+            dgvVerseDisplay.DataSource = _versesBindingSource;
+        }
+
+        /// <summary>
+        /// Refresh the verses data grid view
+        /// </summary>
+        public void RefreshVersesDgv()
+        {
+            // Get the verses from the business logic layer
+            List<VerseDisplayModel> verses = _verseLogic.GetAllVerses();
+            // Set the data source for the binding source object
+            _versesBindingSource.DataSource = verses;
+
+            // Format the data grid view
+            FormatVersesDgv();
+        }
+
+        /// <summary>
+        /// Format the verses data grid view
+        /// </summary>
+        private void FormatVersesDgv()
+        {
+            // calculate the width for the text and meaning columns
+            int width = (dgvVerseDisplay.Width - dgvVerseDisplay.Columns[0].Width - dgvVerseDisplay.Columns[3].Width) / 2;
+            // Set the width for the text column
+            dgvVerseDisplay.Columns[1].Width = width;
+            // Set the width for the meaning column
+            dgvVerseDisplay.Columns[2].Width = width;
+            // Set the default cell style so text will wrap
+            dgvVerseDisplay.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            // Call the auto resize rows method so the rows will expand
+            dgvVerseDisplay.AutoResizeRows();
+        }
+
     }
 }
