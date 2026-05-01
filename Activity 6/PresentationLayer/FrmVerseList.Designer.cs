@@ -72,7 +72,7 @@
             mnsFileActions.Items.AddRange(new ToolStripItem[] { tsmFile });
             mnsFileActions.Location = new Point(0, 0);
             mnsFileActions.Name = "mnsFileActions";
-            mnsFileActions.Size = new Size(1131, 24);
+            mnsFileActions.Size = new Size(1366, 24);
             mnsFileActions.TabIndex = 0;
             mnsFileActions.Text = "mns";
             // 
@@ -86,19 +86,20 @@
             // tsmSave
             // 
             tsmSave.Name = "tsmSave";
-            tsmSave.Size = new Size(100, 22);
+            tsmSave.Size = new Size(180, 22);
             tsmSave.Text = "Save";
+            tsmSave.Click += TsmSaveClickEH;
             // 
             // tsmLoad
             // 
             tsmLoad.Name = "tsmLoad";
-            tsmLoad.Size = new Size(100, 22);
+            tsmLoad.Size = new Size(180, 22);
             tsmLoad.Text = "Load";
             // 
             // tsmExit
             // 
             tsmExit.Name = "tsmExit";
-            tsmExit.Size = new Size(100, 22);
+            tsmExit.Size = new Size(180, 22);
             tsmExit.Text = "Exit";
             // 
             // grpAddVerse
@@ -362,14 +363,14 @@
             dgvVerseDisplay.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvVerseDisplay.Location = new Point(345, 38);
             dgvVerseDisplay.Name = "dgvVerseDisplay";
-            dgvVerseDisplay.Size = new Size(754, 723);
+            dgvVerseDisplay.Size = new Size(926, 723);
             dgvVerseDisplay.TabIndex = 4;
             // 
             // FrmVerseList
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1131, 1001);
+            ClientSize = new Size(1366, 1001);
             Controls.Add(dgvVerseDisplay);
             Controls.Add(trbNumberToShow);
             Controls.Add(grpFilterAndSort);
