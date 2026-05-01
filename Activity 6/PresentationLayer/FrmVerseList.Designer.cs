@@ -353,6 +353,7 @@
             rdoShowAll.TabStop = true;
             rdoShowAll.Text = "Show All";
             rdoShowAll.UseVisualStyleBackColor = true;
+            rdoShowAll.CheckedChanged += RdoShowAllCheckedChangedEH;
             // 
             // trbNumberToShow
             // 
