@@ -200,6 +200,7 @@
             txtVerseVerse.Name = "txtVerseVerse";
             txtVerseVerse.Size = new Size(100, 23);
             txtVerseVerse.TabIndex = 3;
+            txtVerseVerse.Leave += TxtVerseVerseLeaveEH;
             // 
             // lblChapterError
             // 
@@ -218,6 +219,7 @@
             txtVerseText.Name = "txtVerseText";
             txtVerseText.Size = new Size(213, 69);
             txtVerseText.TabIndex = 2;
+            txtVerseText.Leave += TxtVerseTextLeaveEH;
             // 
             // lblBookError
             // 
