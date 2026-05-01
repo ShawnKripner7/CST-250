@@ -32,9 +32,12 @@ namespace FileIOAndLINQ.PresentationLayer
         private BindingSource _versesBindingSource;
         // Filters for file dialogs
         string filter = "All Files (*.*)|*.*|" +
-                        "Text File (*.txt)|*.txt|" +
-                        "CSV File (*.csv)|*.csv|" +
-                        "JSON File (*.json)|*.json";
+                "Text File (*.txt)|*.txt|" +
+                "CSV File (*.csv)|*.csv|" +
+                "JSON File (*.json)|*.json|" +
+                "XML File (*.xml)|*.xml|" +
+                "Excel File (*.xlsx)|*.xlsx";
+
         // Store the number of verses to show
         private int _numToShow;
 
@@ -328,6 +331,9 @@ namespace FileIOAndLINQ.PresentationLayer
 
                 // Refresh the data grid view
                 RefreshVersesDgv();
+
+                // Update total verses label
+                lblTotalVerses.Text = $"Total Verses: {_verseLogic.GetTotalVerseCount()}";
             }
             // Check if the book is invalid
             else if (!isValidBook)
@@ -548,6 +554,31 @@ namespace FileIOAndLINQ.PresentationLayer
         {
             // Refresh the dgv with all of the users verses
             RefreshVersesDgv();
+        }
+
+        /// <summary>
+        /// Filter verses based on search input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TxtSearchTextChangedEH(object sender, EventArgs e)
+        {
+            // Get the search text
+            string search = txtSearch.Text.ToLower();
+
+            // Get all verses and filter them
+            List<VerseDisplayModel> filteredVerses = _verseLogic.GetAllVerses()
+                .Where(v =>
+                    v.Reference.ToLower().Contains(search) ||
+                    v.Text.ToLower().Contains(search) ||
+                    v.Meaning.ToLower().Contains(search))
+                .ToList();
+
+            // Update the data grid view
+            _versesBindingSource.DataSource = filteredVerses;
+
+            // Format the grid
+            FormatVersesDgv();
         }
     }
 }

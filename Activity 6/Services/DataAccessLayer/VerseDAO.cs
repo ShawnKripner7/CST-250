@@ -77,6 +77,11 @@ namespace FileIOAndLINQ.Services.DataAccessLayer
                     }
                     break;
 
+                case ".xml":
+                    // Serialize to XML
+                    serialized = ServiceStack.Text.XmlSerializer.SerializeToString(_verses);
+                    break;
+
                 case ".csv":
                     // Use ServiceStack to serialize to csv
                     serialized = ServiceStack.Text.CsvSerializer.SerializeToString(_verses);
@@ -86,6 +91,45 @@ namespace FileIOAndLINQ.Services.DataAccessLayer
                     // Use ServiceStack to serialize to json
                     serialized = ServiceStack.Text.JsonSerializer.SerializeToString(_verses);
                     break;
+
+                case ".xlsx":
+                    // Set the license for EPPlus
+                    OfficeOpenXml.ExcelPackage.License.SetNonCommercialPersonal("Student");
+
+                    // Create a new Excel package
+                    using (var package = new OfficeOpenXml.ExcelPackage())
+                    {
+                        // Add a worksheet to store the verses
+                        var worksheet = package.Workbook.Worksheets.Add("Verses");
+
+                        // Add column headers
+                        worksheet.Cells[1, 1].Value = "Book";
+                        worksheet.Cells[1, 2].Value = "Chapter";
+                        worksheet.Cells[1, 3].Value = "Verse";
+                        worksheet.Cells[1, 4].Value = "Text";
+                        worksheet.Cells[1, 5].Value = "Meaning";
+                        worksheet.Cells[1, 6].Value = "Importance";
+
+                        int row = 2;
+
+                        // Loop through the verses list and add each verse to a new row
+                        foreach (var verse in _verses)
+                        {
+                            worksheet.Cells[row, 1].Value = verse.Book;
+                            worksheet.Cells[row, 2].Value = verse.Chapter;
+                            worksheet.Cells[row, 3].Value = verse.Verse;
+                            worksheet.Cells[row, 4].Value = verse.Text;
+                            worksheet.Cells[row, 5].Value = verse.Meaning;
+                            worksheet.Cells[row, 6].Value = verse.Importance;
+                            row++;
+                        }
+
+                        // Save the Excel file to the selected location
+                        File.WriteAllBytes(fileName, package.GetAsByteArray());
+                    }
+
+                    // Return a success message
+                    return "The verses have been saved to your Excel file";
 
                 default:
                     return "File not recognized";
@@ -144,6 +188,10 @@ namespace FileIOAndLINQ.Services.DataAccessLayer
                             dataVerses.Add(ConvertTxtToVerseDataModel(line));
                         }
                     }
+                    break;
+                case ".xml":
+                    // Deserialize XML
+                    dataVerses = ServiceStack.Text.XmlSerializer.DeserializeFromString<List<VerseDataModel>>(data);
                     break;
 
                 case ".json":

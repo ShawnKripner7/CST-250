@@ -12,7 +12,7 @@ using System.Text;
 
 namespace FileIOAndLINQ.Models
 {
-    class VerseDisplayModel
+    public class VerseDisplayModel
     {
         // Class level properties
         public string Reference { get; set; }

@@ -59,6 +59,9 @@
             rdoShowAll = new RadioButton();
             trbNumberToShow = new TrackBar();
             dgvVerseDisplay = new DataGridView();
+            txtSearch = new TextBox();
+            lblSearch = new Label();
+            lblTotalVerses = new Label();
             mnsFileActions.SuspendLayout();
             grpAddVerse.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudVerseImportance).BeginInit();
@@ -368,14 +371,43 @@
             dgvVerseDisplay.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvVerseDisplay.Location = new Point(345, 38);
             dgvVerseDisplay.Name = "dgvVerseDisplay";
-            dgvVerseDisplay.Size = new Size(926, 723);
+            dgvVerseDisplay.Size = new Size(984, 723);
             dgvVerseDisplay.TabIndex = 4;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(80, 944);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(100, 23);
+            txtSearch.TabIndex = 5;
+            txtSearch.TextChanged += TxtSearchTextChangedEH;
+            // 
+            // lblSearch
+            // 
+            lblSearch.AutoSize = true;
+            lblSearch.Location = new Point(29, 947);
+            lblSearch.Name = "lblSearch";
+            lblSearch.Size = new Size(45, 15);
+            lblSearch.TabIndex = 6;
+            lblSearch.Text = "Search:";
+            // 
+            // lblTotalVerses
+            // 
+            lblTotalVerses.AutoSize = true;
+            lblTotalVerses.Location = new Point(29, 990);
+            lblTotalVerses.Name = "lblTotalVerses";
+            lblTotalVerses.Size = new Size(80, 15);
+            lblTotalVerses.TabIndex = 7;
+            lblTotalVerses.Text = "Total Verses: 0";
             // 
             // FrmVerseList
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1366, 1001);
+            ClientSize = new Size(1366, 1065);
+            Controls.Add(lblTotalVerses);
+            Controls.Add(lblSearch);
+            Controls.Add(txtSearch);
             Controls.Add(dgvVerseDisplay);
             Controls.Add(trbNumberToShow);
             Controls.Add(grpFilterAndSort);
@@ -431,5 +463,8 @@
         private RadioButton rdoShowAll;
         private TrackBar trbNumberToShow;
         private DataGridView dgvVerseDisplay;
+        private TextBox txtSearch;
+        private Label lblSearch;
+        private Label lblTotalVerses;
     }
 }

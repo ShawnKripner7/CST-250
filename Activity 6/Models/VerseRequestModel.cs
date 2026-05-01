@@ -12,7 +12,7 @@ using System.Text;
 
 namespace FileIOAndLINQ.Models
 {
-    class VerseRequestModel
+    public class VerseRequestModel
     {
         // Class level properties
         public string Book { get; set; }
