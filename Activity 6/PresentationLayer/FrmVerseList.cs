@@ -522,5 +522,21 @@ namespace FileIOAndLINQ.PresentationLayer
             // Change the DataSource for the verse binding source
             _versesBindingSource.DataSource = leastImportantVerses;
         }
+
+        /// <summary>
+        /// Display the most important verses to the user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RdoShowMostImportantCheckedChangedEH(object sender, EventArgs e)
+        {
+            // Get the list of most important verses from the BLL
+            List<VerseDisplayModel> mostImportantVerses = _verseLogic.GetMostImportantVerses(_numToShow);
+            // Change the DataSource for the verse binding source
+            _versesBindingSource.DataSource = mostImportantVerses;
+
+            // Format the data grid view
+            FormatVersesDgv();
+        }
     }
 }
