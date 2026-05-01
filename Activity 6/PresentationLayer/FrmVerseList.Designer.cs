@@ -54,8 +54,8 @@
             lblText = new Label();
             lblVerse = new Label();
             grpFilterAndSort = new GroupBox();
-            rdoShowMostValuable = new RadioButton();
-            rdoShowLeastValuable = new RadioButton();
+            rdoShowMostImportant = new RadioButton();
+            rdoShowLeastImportant = new RadioButton();
             rdoShowAll = new RadioButton();
             trbNumberToShow = new TrackBar();
             dgvVerseDisplay = new DataGridView();
@@ -86,21 +86,21 @@
             // tsmSave
             // 
             tsmSave.Name = "tsmSave";
-            tsmSave.Size = new Size(180, 22);
+            tsmSave.Size = new Size(100, 22);
             tsmSave.Text = "Save";
             tsmSave.Click += TsmSaveClickEH;
             // 
             // tsmLoad
             // 
             tsmLoad.Name = "tsmLoad";
-            tsmLoad.Size = new Size(180, 22);
+            tsmLoad.Size = new Size(100, 22);
             tsmLoad.Text = "Load";
             tsmLoad.Click += TsmLoadClickEH;
             // 
             // tsmExit
             // 
             tsmExit.Name = "tsmExit";
-            tsmExit.Size = new Size(180, 22);
+            tsmExit.Size = new Size(100, 22);
             tsmExit.Text = "Exit";
             // 
             // grpAddVerse
@@ -309,8 +309,8 @@
             // 
             // grpFilterAndSort
             // 
-            grpFilterAndSort.Controls.Add(rdoShowMostValuable);
-            grpFilterAndSort.Controls.Add(rdoShowLeastValuable);
+            grpFilterAndSort.Controls.Add(rdoShowMostImportant);
+            grpFilterAndSort.Controls.Add(rdoShowLeastImportant);
             grpFilterAndSort.Controls.Add(rdoShowAll);
             grpFilterAndSort.Location = new Point(12, 685);
             grpFilterAndSort.Name = "grpFilterAndSort";
@@ -319,27 +319,27 @@
             grpFilterAndSort.TabStop = false;
             grpFilterAndSort.Text = "Filter And Sort";
             // 
-            // rdoShowMostValuable
+            // rdoShowMostImportant
             // 
-            rdoShowMostValuable.AutoSize = true;
-            rdoShowMostValuable.Location = new Point(3, 138);
-            rdoShowMostValuable.Name = "rdoShowMostValuable";
-            rdoShowMostValuable.Size = new Size(140, 19);
-            rdoShowMostValuable.TabIndex = 4;
-            rdoShowMostValuable.TabStop = true;
-            rdoShowMostValuable.Text = "Show Most Important";
-            rdoShowMostValuable.UseVisualStyleBackColor = true;
+            rdoShowMostImportant.AutoSize = true;
+            rdoShowMostImportant.Location = new Point(3, 138);
+            rdoShowMostImportant.Name = "rdoShowMostImportant";
+            rdoShowMostImportant.Size = new Size(140, 19);
+            rdoShowMostImportant.TabIndex = 4;
+            rdoShowMostImportant.TabStop = true;
+            rdoShowMostImportant.Text = "Show Most Important";
+            rdoShowMostImportant.UseVisualStyleBackColor = true;
             // 
-            // rdoShowLeastValuable
+            // rdoShowLeastImportant
             // 
-            rdoShowLeastValuable.AutoSize = true;
-            rdoShowLeastValuable.Location = new Point(0, 88);
-            rdoShowLeastValuable.Name = "rdoShowLeastValuable";
-            rdoShowLeastValuable.Size = new Size(131, 19);
-            rdoShowLeastValuable.TabIndex = 3;
-            rdoShowLeastValuable.TabStop = true;
-            rdoShowLeastValuable.Text = "Show Least Valuable";
-            rdoShowLeastValuable.UseVisualStyleBackColor = true;
+            rdoShowLeastImportant.AutoSize = true;
+            rdoShowLeastImportant.Location = new Point(0, 88);
+            rdoShowLeastImportant.Name = "rdoShowLeastImportant";
+            rdoShowLeastImportant.Size = new Size(140, 19);
+            rdoShowLeastImportant.TabIndex = 3;
+            rdoShowLeastImportant.TabStop = true;
+            rdoShowLeastImportant.Text = "Show Least Important";
+            rdoShowLeastImportant.UseVisualStyleBackColor = true;
             // 
             // rdoShowAll
             // 
@@ -358,6 +358,7 @@
             trbNumberToShow.Name = "trbNumberToShow";
             trbNumberToShow.Size = new Size(313, 45);
             trbNumberToShow.TabIndex = 3;
+            trbNumberToShow.Scroll += TrbNumberToShowScrollEH;
             // 
             // dgvVerseDisplay
             // 
@@ -422,8 +423,8 @@
         private Label lblBookError;
         private Label lblImportanceError;
         private GroupBox grpFilterAndSort;
-        private RadioButton rdoShowMostValuable;
-        private RadioButton rdoShowLeastValuable;
+        private RadioButton rdoShowMostImportant;
+        private RadioButton rdoShowLeastImportant;
         private RadioButton rdoShowAll;
         private TrackBar trbNumberToShow;
         private DataGridView dgvVerseDisplay;
